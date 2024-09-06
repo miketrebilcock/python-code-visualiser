@@ -13,10 +13,11 @@ permissions:
   statuses: write
 
 jobs:
-  lint:
+  test:
     name: Example Diagrams
     runs-on: ubuntu-latest
     steps:
+    - uses: actions/checkout@v4
     - name: install nightly
       run: |
         rustup set profile minimal
@@ -30,7 +31,7 @@ jobs:
       shell: bash
     - name: run pymermaider
       run: |
-        pymermaider/target/release/pymermaider
+        pymermaider/target/release/pymermaider --input .
       shell: bash
     - name: upload artifacts
       uses: actions/upload-artifact@v2
