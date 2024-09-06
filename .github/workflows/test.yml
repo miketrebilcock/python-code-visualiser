@@ -31,7 +31,7 @@ jobs:
       shell: bash
     - name: run pymermaider
       run: |
-        pymermaider/target/release/pymermaider --input .
+        pymermaider/target/release/pymermaider .
       shell: bash
     - name: upload artifacts
       uses: actions/upload-artifact@v2
