@@ -13,7 +13,7 @@ The following workflow permissions are necessary:
 ```yml
 permissions:
   contents: read
-  statuses: write
+  pull-requests: write
 ```
 
 ### Inputs
@@ -22,7 +22,7 @@ permissions:
 
 | Name       | Description                                                                                                                                                                                                              | Required | Default        |
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------- |
-| `gh-token` | `GITHUB_TOKEN` (permissions `contents: write` and `pull-requests: write`) or a `repo` scoped [Personal Access Token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). | no       | `GITHUB_TOKEN` |
+| `gh-token` | `GITHUB_TOKEN` (permissions `contents: read` and `pull-requests: write`) or a `repo` scoped [Personal Access Token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). | no       | `GITHUB_TOKEN` |
 
 ## Outputs
 

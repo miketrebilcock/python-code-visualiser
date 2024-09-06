@@ -24,27 +24,21 @@ runs:
     shell: bash
   - name: run pymermaider
     run: |
-      pymermaider/target/release/pymermaider
+      pymermaider/target/release/pymermaider .
+      cat ./output/${{ github.event.repository.name }}.md
     shell: bash
   - name: upload artifacts
     uses: actions/upload-artifact@v2
     with:
       name: mermaid-diagrams
       path:
-        pymermaider/target/release/output/*.md
+        ./output/${{ github.event.repository.name }}.md
   - name: Upload mermaid md file diagram into PR
-    uses: actions/github-script@v7
+    uses: thollander/actions-comment-pull-request@v2
     with:
-      github-token: ${{ inputs.gh-token }}
-      script: |
-        const fs = require('fs');
-        const body = fs.readFileSync('pymermaider/target/release/output/*.md', 'utf8');
-        github.rest.issues.createComment({
-          issue_number: context.issue.number,
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          body: '```mermaid\n' + body + '\n```' 
-        })
+      GITHUB_TOKEN: ${{ inputs.GH_TOKEN }}
+      filePath: ./output/${{ github.event.repository.name }}.md
+      comment_tag: 'mermaid-diagram'
 
 
 
