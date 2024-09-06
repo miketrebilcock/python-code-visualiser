@@ -1,0 +1,53 @@
+name: Lint Code Base
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  statuses: write
+
+jobs:
+  lint:
+    name: Example Diagrams
+    runs-on: ubuntu-latest
+    steps:
+    - name: install nightly
+      run: |
+        rustup set profile minimal
+        rustup toolchain install nightly
+      shell: bash
+    - name: build pymermaider
+      run: |
+        git clone https://github.com/diceroll123/pymermaider
+        cd pymermaider
+        cargo build --release
+      shell: bash
+    - name: run pymermaider
+      run: |
+        pymermaider/target/release/pymermaider
+      shell: bash
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: mermaid-diagrams
+        path:
+          pymermaider/target/release/output/*.md
+    - name: Upload mermaid md file diagram into PR
+      uses: actions/github-script@v7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs');
+          const body = fs.readFileSync('pymermaider/target/release/output/*.md', 'utf8');
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: '```mermaid\n' + body + '\n```' 
+          })
