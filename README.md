@@ -1,7 +1,7 @@
 # python-code-visualiser
 ## Overview
 
-Python Code Visualiser is a github action that will create mermaid class diagrams of the a repo.  The diagram can be posted to a PR as a comment to assist with Code Review, or just add as an artifact.
+Python Code Visualiser is a github action that will create mermaid class diagrams of pythong code from in the repo.  The diagram will be posted to a PR as a comment to assist with Code Review, and also saved as a build artifact.
 
 The repo makes use of the fantastic [pymermaider](https://github.com/diceroll123/pymermaider) to create the diagrams.
 
@@ -49,6 +49,8 @@ jobs:
 ```
 
 ## Outputs
+A comment will be added to a PR to display the class diagram using mermaid.
+![Example](images/example.png)
 
 ## Contributing
 
