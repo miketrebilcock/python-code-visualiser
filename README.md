@@ -24,6 +24,30 @@ permissions:
 | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | -------- | -------------- |
 | `gh-token` | `GITHUB_TOKEN` (permissions `contents: read` and `pull-requests: write`) or a `repo` scoped [Personal Access Token (PAT)](https://docs.github.com/en/github/authenticating-to-github/creating-a-personal-access-token). | no       | `GITHUB_TOKEN` |
 
+### Workflow
+
+Add the following GitHub workflow to your repository.
+
+```yaml
+name: Insert Class Diagram
+on:
+  pull_request:
+    branches:
+        - main
+  permissions:
+    contents: read
+    pull-requests: write
+jobs:
+  createClassDiagram:
+    name: Create Diagram
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - uses: miketrebilcock/python-code-visualiser@v1
+      with:
+        gh-token: ${{ secrets.gh_token }}
+```
+
 ## Outputs
 
 ## Contributing
