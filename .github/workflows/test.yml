@@ -45,4 +45,4 @@ jobs:
       with:
         filePath: ./output/${{ github.event.repository.name }}.md
         comment_tag: 'mermaid-diagram'
-        GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
