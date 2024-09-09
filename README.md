@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: miketrebilcock/python-code-visualiser@v1
+    - uses: miketrebilcock/python-code-visualiser@v2
       with:
         gh-token: ${{ secrets.gh_token }}
 ```
